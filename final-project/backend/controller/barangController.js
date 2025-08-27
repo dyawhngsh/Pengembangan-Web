@@ -59,15 +59,14 @@ export const updateBarang = async(req,res) => {
     }
 }
 
-export const deleteBarang = async(req,res) => {
-    const {nama_barang,harga,stok}=req.body
+export const handleDelete = async(req,res) => {
     try {
-        const response = await prisma.dataBarang.delete({
+        await prisma.dataBarang.delete({
             where: {
                 id : Number(req.params.id)
             }
         })
-        res.status(200).json(response)
+        res.status(200).json("Barang berhasil dihapus")
     } catch (error) {
         res.status(404).json({message:error.message})
     }
